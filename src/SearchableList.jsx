@@ -1,8 +1,10 @@
 import { Component } from 'react';
 import InfiniteList from './InfiniteList';
+import MultiSelectList from './MultiSelectList';
+import SingleSelectList from './SingleSelectList';
 import { startsWith } from 'lodash';
 
-export default class SearchList extends Component {
+export default class SearchableList extends Component {
     constructor(props) {
         super(props);
 
@@ -31,29 +33,34 @@ export default class SearchList extends Component {
     }
 
     render() {
+        const ListComponent = this.props.listClass;
+
         return (
-            <div>
+            <div className="searchable-list">
                 <input
                     ref="searchInput"
                     className="search"
                     onChange={this.onSearchChange.bind(this)}
                     value={this.state.search}
                     />
-                <InfiniteList
+                <ListComponent
                     {...this.props}
                     items={this.state.items}
-                    height={this.props.height}
-                    itemHeight={this.props.itemHeight}
                     />
             </div>
         );
     }
 }
 
-SearchList.displayName = "SearchList";
+SearchableList.displayName = "SearchableList";
 
-SearchList.propTypes = {
+SearchableList.propTypes = {
     items: React.PropTypes.array.isRequired,
     height: React.PropTypes.number.isRequired,
-    itemHeight: React.PropTypes.number.isRequired
+    itemHeight: React.PropTypes.number.isRequired,
+    listClass: React.PropTypes.oneOfType([
+        React.PropTypes.instanceOf(InfiniteList),
+        React.PropTypes.instanceOf(MultiSelectList),
+        React.PropTypes.instanceOf(SingleSelectList)
+    ]).isRequired
 };

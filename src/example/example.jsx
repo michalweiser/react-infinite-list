@@ -1,7 +1,6 @@
 import React from 'react';
+import SearchableList from '../SearchableList';
 import MultiSelectList, { MultiSelectListItem } from '../MultiSelectList';
-
-//var SimpleSelectList = require('../SimpleSelectList.jsx');
 
 require('./styles/app.scss');
 
@@ -22,11 +21,16 @@ const InfiniteListItem = class extends React.Component {
 };
 
 React.render(
-    <MultiSelectList
-        items={items}
-        height={150}
-        itemHeight={20}
-        listItemClass={MultiSelectListItem}
-    />,
+    <div className='examples'>
+        <div className='list-example'>
+            <SearchableList
+                listClass={MultiSelectList}
+                items={items}
+                height={150}
+                itemHeight={20}
+                listItemClass={MultiSelectListItem}
+            />
+        </div>
+    </div>,
     document.getElementById('app')
 );

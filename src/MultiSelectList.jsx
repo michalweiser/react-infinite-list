@@ -1,39 +1,10 @@
 import { Component } from 'react';
-import InfiniteList from './InfiniteList';
-import cx from 'classnames';
 import {
     includes,
     remove
 } from 'lodash';
-
-export class MultiSelectListItem extends Component {
-    handleSelect() {
-        this.props.item.onSelect(this.props.item);
-    }
-
-    handleOnly(ev) {
-        ev.stopPropagation();
-        this.props.item.onOnly(this.props.item);
-    }
-
-    getClassnames() {
-        return cx({
-            'multi-select-list-item': true,
-            'selected': this.props.item.selected
-        });
-    }
-
-    render() {
-        return (
-            <div
-                className={this.getClassnames()}
-                onClick={this.handleSelect.bind(this)}>
-            {this.props.title}
-            <span onClick={this.handleOnly.bind(this)}>only</span>
-            </div>
-        );
-    }
-}
+import MultiSelectListItem from './MultiSelectListItem';
+import InfiniteList from './InfiniteList';
 
 export default class MultiSelectList extends Component {
     constructor(props) {
@@ -82,15 +53,13 @@ export default class MultiSelectList extends Component {
             <InfiniteList
                 {...this.props}
                 items={this.selectableItems()}
-                height={this.props.height}
-                itemHeight={this.props.itemHeight}
                 listItemClass={MultiSelectListItem}
                 />
         );
     }
 }
 
-MultiSelectList.displayName = "MultiSelectList";
+MultiSelectList.displayName = 'MultiSelectList';
 
 MultiSelectList.propTypes = {
     items: React.PropTypes.array.isRequired,
