@@ -9,7 +9,7 @@ export class SimpleSelectListItem extends Component {
 
     getClassnames() {
         return cx({
-            'infinite-list-item': true,
+            'simple-select-list-item': true,
             'selected': this.props.item.selected
         });
     }
