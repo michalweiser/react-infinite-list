@@ -58,9 +58,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
-	var _get = function get(object, property, receiver) { var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc && desc.writable) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
-
 	var _createClass = (function () { function defineProperties(target, props) { for (var key in props) { var prop = props[key]; prop.configurable = true; if (prop.value) prop.writable = true; } Object.defineProperties(target, props); } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(object, property, receiver) { var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc && desc.writable) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
 	var _inherits = function (subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
 
@@ -70,36 +70,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(1));
 
-	var InfiniteListItem = (function (_React$Component) {
-	    function InfiniteListItem() {
-	        _classCallCheck(this, InfiniteListItem);
+	var guidFor = __webpack_require__(2).guidFor;
 
-	        if (_React$Component != null) {
-	            _React$Component.apply(this, arguments);
-	        }
-	    }
-
-	    _inherits(InfiniteListItem, _React$Component);
-
-	    _createClass(InfiniteListItem, {
-	        render: {
-	            value: function render() {
-	                return React.createElement(
-	                    "div",
-	                    { className: "infinite-list-item" },
-	                    this.props.title
-	                );
-	            }
-	        }
-	    });
-
-	    return InfiniteListItem;
-	})(React.Component);
-
-	InfiniteListItem.propTypes = {
-	    height: React.PropTypes.number.isRequired,
-	    title: React.PropTypes.string.isRequired
-	};
+	var InfiniteListItem = _interopRequire(__webpack_require__(3));
 
 	var isWebkit = /WebKit/.test(navigator && navigator.userAgent || "");
 
@@ -107,17 +80,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return window.matchMedia && (window.matchMedia("only screen and (min-resolution: 124dpi), only screen and (min-resolution: 1.3dppx), only screen and (min-resolution: 48.8dpcm)").matches || window.matchMedia("only screen and (-webkit-min-device-pixel-ratio: 1.3), only screen and (-o-min-device-pixel-ratio: 2.6/2), only screen and (min--moz-device-pixel-ratio: 1.3), only screen and (min-device-pixel-ratio: 1.3)").matches) || window.devicePixelRatio && window.devicePixelRatio > 1.3;
 	}
 
-	var InfiniteList = (function (_React$Component2) {
+	var InfiniteList = (function (_React$Component) {
 	    function InfiniteList(props) {
 	        _classCallCheck(this, InfiniteList);
 
 	        _get(Object.getPrototypeOf(InfiniteList.prototype), "constructor", this).call(this, props);
-
 	        this._scrollTimer = null;
 	        this.state = { renderedStart: 0 };
 	    }
 
-	    _inherits(InfiniteList, _React$Component2);
+	    _inherits(InfiniteList, _React$Component);
 
 	    _createClass(InfiniteList, {
 	        onWheel: {
@@ -175,7 +147,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _getItemComponent: {
 	            value: function _getItemComponent(item) {
 	                var ListItemComponent = this.props.listItemClass || InfiniteListItem;
-	                return React.createElement(ListItemComponent, _extends({ key: item.id }, item));
+	                return React.createElement(ListItemComponent, _extends({ key: item.id, item: item }, item));
 	            }
 	        },
 	        render: {
@@ -228,6 +200,107 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __WEBPACK_EXTERNAL_MODULE_1__;
+
+/***/ },
+/* 2 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+
+	exports.guidFor = guidFor;
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var uuid = _interopRequire(__webpack_require__(4));
+
+	var GUID_KEY = "__infID";
+
+	exports.GUID_KEY = GUID_KEY;
+
+	function guidFor(obj) {
+	    if (!obj) {
+	        return "(null)";
+	    }if (obj[GUID_KEY]) {
+	        return obj[GUID_KEY];
+	    }var stamp = "infID-" + uuid.generate();
+
+	    Object.defineProperty(obj, GUID_KEY, {
+	        writable: false,
+	        configurable: false,
+	        enumerable: false,
+	        value: stamp
+	    });
+
+	    return stamp;
+	}
+
+/***/ },
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var key in props) { var prop = props[key]; prop.configurable = true; if (prop.value) prop.writable = true; } Object.defineProperties(target, props); } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _inherits = function (subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+
+	var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
+
+	var React = _interopRequire(__webpack_require__(1));
+
+	var InfiniteListItem = (function (_React$Component) {
+	    function InfiniteListItem() {
+	        _classCallCheck(this, InfiniteListItem);
+
+	        if (_React$Component != null) {
+	            _React$Component.apply(this, arguments);
+	        }
+	    }
+
+	    _inherits(InfiniteListItem, _React$Component);
+
+	    _createClass(InfiniteListItem, {
+	        render: {
+	            value: function render() {
+	                return React.createElement(
+	                    "div",
+	                    { className: "infinite-list-item" },
+	                    this.props.title
+	                );
+	            }
+	        }
+	    });
+
+	    return InfiniteListItem;
+	})(React.Component);
+
+	module.exports = InfiniteListItem;
+
+	InfiniteListItem.propTypes = {
+	    height: React.PropTypes.number.isRequired,
+	    title: React.PropTypes.string.isRequired
+	};
+
+/***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	module.exports = {
+	    uuid: 0,
+
+	    generate: function generate() {
+	        this.uuid++;
+
+	        return this.uuid;
+	    }
+	};
 
 /***/ }
 /******/ ])

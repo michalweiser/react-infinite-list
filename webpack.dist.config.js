@@ -46,7 +46,7 @@ if (process.env.NODE_ENV === 'production') {
 
 var buildConfig = _.assign(getWebpackConfig(), {
     entry: {
-        lib: './src/InfiniteList'
+        lib: './src/components/InfiniteList'
     },
 
     output: {

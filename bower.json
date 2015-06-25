@@ -19,7 +19,6 @@
     "**/.*",
     "node_modules",
     "package.json",
-    "src",
     "index.html",
     ".gitignore",
     ".npmignore",

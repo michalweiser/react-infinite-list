@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { guidFor } from './utils/guid';
+import { guidFor } from '../utils/guid';
 import InfiniteListItem from './InfiniteListItem.jsx';
 
 var isWebkit = /WebKit/.test(navigator && navigator.userAgent || '');
