@@ -1,5 +1,5 @@
 import React from 'react';
-import SimpleSelectList, { SimpleSelectListItem } from '../SimpleSelectList';
+import MultiSelectList, { MultiSelectListItem } from '../MultiSelectList';
 
 //var SimpleSelectList = require('../SimpleSelectList.jsx');
 
@@ -22,11 +22,11 @@ const InfiniteListItem = class extends React.Component {
 };
 
 React.render(
-    <SimpleSelectList
+    <MultiSelectList
         items={items}
         height={150}
         itemHeight={20}
-        listItemClass={SimpleSelectListItem}
+        listItemClass={MultiSelectListItem}
     />,
     document.getElementById('app')
 );
