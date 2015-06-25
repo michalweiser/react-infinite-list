@@ -9,19 +9,23 @@ export default class SingleSelectList extends Component {
         this.state = {
             selectedItem: null
         };
+
+        this.state.items = this.selectableItems();
+    }
+
+    selectableItems() {
+        return this.props.items.map((item) => {
+            return {
+                source: item,
+                onSelect: this.onSelect.bind(this),
+                selected: (item === this.state.selectedItem)
+            };
+        });
     }
 
     onSelect(item) {
         this.setState({
             selectedItem: item
-        });
-    }
-
-    selectableItems() {
-        return this.props.items.map((item) => {
-            item.onSelect = this.onSelect.bind(this);
-            item.selected = (item === this.state.selectedItem);
-            return item;
         });
     }
 

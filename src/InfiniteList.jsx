@@ -12,7 +12,6 @@ function isHighDensity() {
 export default class InfiniteList extends React.Component {
     constructor(props) {
         super(props);
-
         this._scrollTimer = null;
         this.state = { renderedStart: 0 };
     }

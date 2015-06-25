@@ -14,6 +14,7 @@ export default class MultiSelectListItem extends Component {
     getClassnames() {
         return cx({
             'multi-select-list-item': true,
+            'select-list-item': true,
             'selected': this.props.item.selected
         });
     }
