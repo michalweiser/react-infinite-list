@@ -11,6 +11,11 @@ export class MultiSelectListItem extends Component {
         this.props.item.onSelect(this.props.item);
     }
 
+    handleOnly(ev) {
+        ev.stopPropagation();
+        this.props.item.onOnly(this.props.item);
+    }
+
     getClassnames() {
         return cx({
             'multi-select-list-item': true,
@@ -24,6 +29,7 @@ export class MultiSelectListItem extends Component {
                 className={this.getClassnames()}
                 onClick={this.handleSelect.bind(this)}>
             {this.props.title}
+            <span onClick={this.handleOnly.bind(this)}>only</span>
             </div>
         );
     }
@@ -52,6 +58,12 @@ export default class MultiSelectList extends Component {
         });
     }
 
+    onOnly(item) {
+        this.setState({
+            selectedItems: [item]
+        });
+    }
+
     isSelected(item) {
         return includes(this.state.selectedItems, item);
     }
@@ -59,6 +71,7 @@ export default class MultiSelectList extends Component {
     selectableItems() {
         return this.props.items.map((item) => {
             item.onSelect = this.onSelect.bind(this);
+            item.onOnly = this.onOnly.bind(this);
             item.selected = this.isSelected(item);
             return item;
         });
