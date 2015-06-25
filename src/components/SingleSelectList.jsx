@@ -27,6 +27,8 @@ export default class SingleSelectList extends Component {
         this.setState({
             selectedItem: item
         });
+
+        this.props.onSelect && this.props.onSelect(item);
     }
 
     render() {
@@ -46,5 +48,6 @@ SingleSelectList.propTypes = {
     items: React.PropTypes.array.isRequired,
     height: React.PropTypes.number.isRequired,
     itemHeight: React.PropTypes.number.isRequired,
+    onSelect: React.PropTypes.function,
     listItemClass: React.PropTypes.instanceOf(SingleSelectListItem)
 };
