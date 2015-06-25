@@ -1,5 +1,7 @@
 import React from 'react';
-var InfiniteList = require('../InfiniteList.jsx');
+import SimpleSelectList, { SimpleSelectListItem } from '../SimpleSelectList';
+
+//var SimpleSelectList = require('../SimpleSelectList.jsx');
 
 require('./styles/app.scss');
 
@@ -20,12 +22,11 @@ const InfiniteListItem = class extends React.Component {
 };
 
 React.render(
-    <InfiniteList
+    <SimpleSelectList
         items={items}
         height={150}
         itemHeight={20}
-        listItemClass={InfiniteListItem}
+        listItemClass={SimpleSelectListItem}
     />,
     document.getElementById('app')
 );
-

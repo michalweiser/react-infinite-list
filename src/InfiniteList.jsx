@@ -67,7 +67,7 @@ export default class InfiniteList extends React.Component {
 
     _getItemComponent(item) {
         var ListItemComponent = this.props.listItemClass || InfiniteListItem;
-        return <ListItemComponent key={item.id} {...item} />;
+        return <ListItemComponent key={item.id} item={item} {...item}/>;
     }
 
     render() {
