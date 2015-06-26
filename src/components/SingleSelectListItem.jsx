@@ -10,7 +10,8 @@ export default class SingleSelectListItem extends Component {
         return cx({
             'simple-select-list-item': true,
             'select-list-item': true,
-            'selected': this.props.selected
+            'infinite-list-item': true,
+            'is-selected': this.props.selected
         });
     }
 
