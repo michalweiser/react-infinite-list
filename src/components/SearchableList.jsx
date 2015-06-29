@@ -15,7 +15,8 @@ export default class SearchableList extends Component {
         this.state = {
             itemsUnfiltered: props.items,
             items: props.items,
-            searched: ''
+            searched: '',
+            search: ''
         };
     }
 
@@ -52,9 +53,9 @@ SearchableList.propTypes = {
     items: React.PropTypes.array.isRequired,
     height: React.PropTypes.number.isRequired,
     itemHeight: React.PropTypes.number.isRequired,
-    listClass: React.PropTypes.oneOfType([
-        React.PropTypes.instanceOf(InfiniteList),
-        React.PropTypes.instanceOf(MultiSelectList),
-        React.PropTypes.instanceOf(SingleSelectList)
+    listClass: React.PropTypes.oneOf([
+        InfiniteList,
+        MultiSelectList,
+        SingleSelectList
     ]).isRequired
 };
