@@ -9,6 +9,5 @@ export default class InfiniteListItem extends React.Component {
 }
 
 InfiniteListItem.propTypes = {
-    height: React.PropTypes.number.isRequired,
     title:  React.PropTypes.string.isRequired
 };

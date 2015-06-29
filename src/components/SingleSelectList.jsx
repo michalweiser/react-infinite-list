@@ -48,6 +48,6 @@ SingleSelectList.propTypes = {
     items: React.PropTypes.array.isRequired,
     height: React.PropTypes.number.isRequired,
     itemHeight: React.PropTypes.number.isRequired,
-    onSelect: React.PropTypes.function,
+    onSelect: React.PropTypes.func,
     listItemClass: React.PropTypes.instanceOf(SingleSelectListItem)
 };

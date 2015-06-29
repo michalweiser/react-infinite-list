@@ -29,7 +29,7 @@ SearchField.displayName = 'SearchField';
 
 SearchField.propTypes = {
     value: React.PropTypes.string.isRequired,
-    onChange: React.PropTypes.function,
-    onClear: React.PropTypes.function,
-    onSubmit: React.PropTypes.function
+    onChange: React.PropTypes.func,
+    onClear: React.PropTypes.func,
+    onSubmit: React.PropTypes.func
 };

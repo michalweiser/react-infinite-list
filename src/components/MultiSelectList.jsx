@@ -41,10 +41,12 @@ export default class MultiSelectList extends Component {
 
     selectableItems() {
         return this.props.items.map((item) => {
-            item.onSelect = this.onSelect.bind(this);
-            item.onOnly = this.onOnly.bind(this);
-            item.selected = this.isSelected(item);
-            return item;
+            return {
+                source: item,
+                onSelect: this.onSelect.bind(this),
+                onOnly: this.onOnly.bind(this),
+                selected: this.isSelected(item)
+            };
         });
     }
 

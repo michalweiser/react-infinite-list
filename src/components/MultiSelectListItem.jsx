@@ -3,12 +3,12 @@ import cx from 'classnames';
 
 export default class MultiSelectListItem extends Component {
     handleSelect() {
-        this.props.item.onSelect(this.props.item);
+        this.props.onSelect(this.props.source);
     }
 
     handleOnly(ev) {
         ev.stopPropagation();
-        this.props.item.onOnly(this.props.item);
+        this.props.onOnly(this.props.source);
     }
 
     getClassnames() {
@@ -16,8 +16,18 @@ export default class MultiSelectListItem extends Component {
             'multi-select-list-item': true,
             'select-list-item': true,
             'infinite-list-item': true,
-            'is-selected': this.props.item.selected
+            'is-selected': this.props.selected
         });
+    }
+
+    selectOnlyThisOne() {
+        return this.handleOnly ? (
+            <span
+                className="multi-select-list-item-only"
+                onClick={this.handleOnly.bind(this)}>
+                only
+            </span>
+        ) : false;
     }
 
     render() {
@@ -25,11 +35,17 @@ export default class MultiSelectListItem extends Component {
             <div
                 className={this.getClassnames()}
                 onClick={this.handleSelect.bind(this)}>
-            {this.props.title}
-            <span onClick={this.handleOnly.bind(this)}>only</span>
+            {this.props.source.title}
+            {this.selectOnlyThisOne()}
             </div>
         );
     }
 }
 
 MultiSelectListItem.displayName = 'MultiSelectListItem';
+
+MultiSelectListItem.propTypes = {
+    title: React.PropTypes.string.isRequired,
+    onSelect: React.PropTypes.func.isRequired,
+    onOnly: React.PropTypes.func
+};
