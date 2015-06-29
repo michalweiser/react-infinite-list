@@ -1,6 +1,6 @@
 import React from 'react/addons';
 
-import InfiniteList from '../InfiniteList.jsx';
+import InfiniteList from '../components/InfiniteList.jsx';
 
 var TestUtils = React.addons.TestUtils;
 
