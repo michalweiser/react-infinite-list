@@ -19,8 +19,7 @@ export default class SearchField extends Component {
                 className="input-text searchfield"
                 onChange={this.onChange.bind(this)}
                 onKeyDown={this.onKeyPress.bind(this)}
-                value={this.props.value}
-                />
+                value={this.props.value}/>
         );
     }
 }

@@ -27,3 +27,9 @@ export default class SingleSelectListItem extends Component {
 }
 
 SingleSelectListItem.displayName = 'SingleSelectListItem';
+
+SingleSelectListItem.propTypes = {
+    source: React.PropTypes.object.isRequired,
+    selected: React.PropTypes.bool.isRequired,
+    onSelect: React.PropTypes.func.isRequired
+};
