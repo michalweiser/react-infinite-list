@@ -2,11 +2,34 @@ import React from 'react/addons';
 
 import SearchField from '../components/SearchField.jsx';
 
-var TestUtils = React.addons.TestUtils;
+let {
+    renderIntoDocument,
+    findRenderedDOMComponentWithTag,
+    Simulate: {
+        click,
+        change,
+        keyDown
+    }
+} = React.addons.TestUtils;
 
 describe('SearchField', function() {
     var onChangeStub, onClearStub, onSubmitStub;
     var EMPTY_STRING = '';
+
+    function renderSearchField(options = {}) {
+        let searchField = renderIntoDocument(
+            <SearchField
+                value=''
+                onChange={options.onChange}
+                onClear={options.onClear}
+                onSubmit={options.onSubmit}
+            />
+        );
+
+        let searchFieldElement = findRenderedDOMComponentWithTag(searchField, 'input');
+
+        return { searchField, searchFieldElement };
+    }
 
     beforeEach(function() {
         onChangeStub = sinon.stub();
@@ -14,82 +37,59 @@ describe('SearchField', function() {
         onSubmitStub = sinon.stub();
     });
 
-    it('should call onChange when value changed', function() {
-        var searchField = TestUtils.renderIntoDocument(
-            <SearchField
-                value=""
-                onChange={onChangeStub}
-                onClear={onClearStub}
-                onSubmit={onSubmitStub}
-            />
-        );
+    describe('With configured callbacks', function() {
+        var searchFieldElement;
 
-        var searchFieldElement = TestUtils.findRenderedDOMComponentWithTag(searchField, 'input');
-        var changedText = 'New text';
+        beforeEach(function() {
+            let renderedSearchField = renderSearchField({
+                onChange: onChangeStub,
+                onClear: onClearStub,
+                onSubmit: onSubmitStub
+            });
 
-        React.addons.TestUtils.Simulate.change(searchFieldElement, {
-            target: {
-                value: changedText
-            }
+            searchFieldElement = renderedSearchField.searchFieldElement;
         });
 
-        expect(onChangeStub.calledWith(changedText)).to.be(true);
-    });
+        it('should call onChange when value changed', function() {
+            const changedText = 'New text';
+            change(searchFieldElement, {
+                target: {
+                    value: changedText
+                }
+            });
 
-    it('should call onSubmit when enter pressed', function() {
-        var searchField = TestUtils.renderIntoDocument(
-            <SearchField
-                value=""
-                onChange={onChangeStub}
-                onClear={onClearStub}
-                onSubmit={onSubmitStub}
-            />
-        );
-
-        var searchFieldElement = TestUtils.findRenderedDOMComponentWithTag(searchField, 'input');
-
-        React.addons.TestUtils.Simulate.keyDown(searchFieldElement, {
-            key: 'Enter'
+            expect(onChangeStub.calledWith(changedText)).to.be(true);
         });
 
-        expect(onSubmitStub.calledWith(EMPTY_STRING)).to.be(true);
-    });
+        it('should call onSubmit when enter pressed', function() {
+            keyDown(searchFieldElement, {
+                key: 'Enter'
+            });
 
-    it('should call onClear when escape pressed', function() {
-        var searchField = TestUtils.renderIntoDocument(
-            <SearchField
-                value=""
-                onChange={onChangeStub}
-                onClear={onClearStub}
-                onSubmit={onSubmitStub}
-            />
-        );
-
-        var searchFieldElement = TestUtils.findRenderedDOMComponentWithTag(searchField, 'input');
-
-        React.addons.TestUtils.Simulate.keyDown(searchFieldElement, {
-            key: 'Escape'
+            expect(onSubmitStub.calledWith(EMPTY_STRING)).to.be(true);
         });
 
-        expect(onClearStub.calledOnce).to.be(true);
+        it('should call onClear when escape pressed', function() {
+            keyDown(searchFieldElement, {
+                key: 'Escape'
+            });
+
+            expect(onClearStub.calledOnce).to.be(true);
+        });
     });
 
     it('should render correctly if on* functions not provided', function() {
-        var searchField = TestUtils.renderIntoDocument(
-            <SearchField value=""/>
-        );
+        let { searchField, searchFieldElement } = renderSearchField();
 
-        var searchFieldElement = TestUtils.findRenderedDOMComponentWithTag(searchField, 'input');
-
-        React.addons.TestUtils.Simulate.keyDown(searchFieldElement, {
+        keyDown(searchFieldElement, {
             key: 'Enter'
         });
 
-        React.addons.TestUtils.Simulate.keyDown(searchFieldElement, {
+        keyDown(searchFieldElement, {
             key: 'Escape'
         });
 
-        React.addons.TestUtils.Simulate.change(searchFieldElement, {
+        change(searchFieldElement, {
             target: {
                 value: 'New text'
             }
