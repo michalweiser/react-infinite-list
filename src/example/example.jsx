@@ -1,11 +1,11 @@
 import React from 'react';
-import SearchableList from '../SearchableList';
-import InfiniteList from '../InfiniteList';
-import InfiniteListItem from '../InfiniteListItem';
-import SingleSelectList from '../SingleSelectList';
-import SingleSelectListItem from '../SingleSelectListItem';
-import MultiSelectList from '../MultiSelectList';
-import MultiSelectListItem from '../MultiSelectListItem';
+import SearchableList from '../components/SearchableList';
+import InfiniteList from '../components/InfiniteList';
+import InfiniteListItem from '../components/InfiniteListItem';
+import SingleSelectList from '../components/SingleSelectList';
+import SingleSelectListItem from '../components/SingleSelectListItem';
+import MultiSelectList from '../components/MultiSelectList';
+import MultiSelectListItem from '../components/MultiSelectListItem';
 
 require('./styles/app.scss');
 

@@ -22,7 +22,7 @@
 .select-list-item {
     cursor: pointer;
 
-    &.selected {
+    &.is-selected {
         background: red;
     }
 }
